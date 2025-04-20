@@ -15,6 +15,10 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const [disabledProducts, setDisableProducts] = useState([]); //State to store disabled products
 
+  const handleAddToCart = product => {
+    dispatch(addItemToCart(product));
+    setDisableProducts([...disabledProducts, product.id]); // Mark the product as disabled
+  };
 
   return (
     <div className="product-list">
@@ -26,7 +30,7 @@ const ProductList = () => {
             <button
                 className={`add-to-cart-btn ${disabledProducts.includes(product.id) ? 'disabled' : ''}`}
                 onClick={()=> handleAddToCart(product)}
-                disabled={disabledProducts.includes(product.id)} //Disable button if product is in disabledProd
+                disabled={disabledProducts.includes(product.id)} //Disable button if product is in disabledProducts
             >
                 Add to Cart
             </button>
